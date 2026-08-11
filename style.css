@@ -1,0 +1,222 @@
+/*
+Theme Name: FFLCH Geografia
+Description: Tema mínimo reproduzindo a testeira (header) do site do Departamento de Geografia - FFLCH/USP.
+Author: 
+Version: 1.0
+*/
+
+/* ===========================
+   RESET BÁSICO
+=========================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===========================
+   TOPO (LOGOS + BUSCA)
+=========================== */
+.site-header {
+    width: 100%;
+    background: #ffffff;
+}
+
+.site-header__top {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 10px;
+    position: relative;
+}
+
+/* busca no canto superior direito */
+.site-header__search {
+    position: absolute;
+    top: -8px;
+    right: 20px;
+}
+
+.site-header__search form {
+    display: flex;
+}
+
+.site-header__search input[type="search"],
+.site-header__search input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 5px 8px;
+    font-size: 13px;
+    width: 140px;
+}
+
+.site-header__search button {
+    background: #1c3f6e;
+    border: 1px solid #1c3f6e;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* logo FFLCH + nome do site */
+.site-branding {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.site-branding__logo img {
+    height: 56px;
+    width: auto;
+    display: block;
+}
+
+.site-branding__text {
+    line-height: 1.15;
+}
+
+.site-branding__line1 {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #1c3f6e;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.site-branding__line2 {
+    display: block;
+    font-size: 30px;
+    font-weight: 700;
+    color: #4a6fa5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* logo USP à direita */
+.site-header__usp img {
+    height: 42px;
+    width: auto;
+    display: block;
+}
+
+/* ===========================
+   MENU PRINCIPAL (NAVEGAÇÃO)
+=========================== */
+.site-nav {
+    background: #1c3f6e;
+    width: 100%;
+}
+
+.site-nav__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.site-nav ul.menu {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.site-nav ul.menu li {
+    position: relative;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.site-nav ul.menu li:last-child {
+    border-right: none;
+}
+
+.site-nav ul.menu li a {
+    display: block;
+    padding: 14px 20px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.site-nav ul.menu li a:hover,
+.site-nav ul.menu li.current-menu-item > a {
+    background: #142f54;
+}
+
+/* seta indicando submenu */
+.site-nav ul.menu li.menu-item-has-children > a::after {
+    content: "\25B8"; /* ► */
+    font-size: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* submenu (dropdown) */
+.site-nav ul.menu ul.sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background: #142f54;
+    z-index: 100;
+}
+
+.site-nav ul.menu li:hover > ul.sub-menu {
+    display: block;
+}
+
+.site-nav ul.menu ul.sub-menu li {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-nav ul.menu ul.sub-menu li a {
+    padding: 12px 18px;
+    white-space: normal;
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+@media (max-width: 900px) {
+    .site-header__top {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .site-header__search {
+        position: static;
+        margin-bottom: 10px;
+    }
+
+    .site-nav ul.menu {
+        flex-direction: column;
+    }
+
+    .site-nav ul.menu li {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .site-nav ul.menu ul.sub-menu {
+        position: static;
+        min-width: 100%;
+    }
+}
