@@ -1,39 +1,101 @@
 /*
-Theme Name: FFLCH Geografia
-Description: Tema mínimo reproduzindo a testeira (header) do site do Departamento de Geografia - FFLCH/USP.
-Author: 
-Version: 1.0
+Theme Name: wp-fflch-theme
+Theme URI: https://github.com/fflch/wp-fflch-theme
+Description: Tema unificado FFLCH - com testeira do Departamento de Geografia e estrutura do tema FFLCH WordPress
+Author: FFLCH - USP
+Version: 2.0.0
+License: GPL v2 or later
+Text Domain: wp-fflch-theme
 */
 
-/* ===========================
-   RESET BÁSICO
-=========================== */
+/* ============================================
+   RESET E BASE
+   ============================================ */
 * {
     box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #222;
-}
-
-a {
-    text-decoration: none;
-}
-
-ul {
-    list-style: none;
     margin: 0;
     padding: 0;
 }
 
-/* ===========================
-   TOPO (LOGOS + BUSCA)
-=========================== */
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #333;
+    background: #f5f5f5;
+    line-height: 1.6;
+}
+
+a {
+    color: #1c3f6e;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #142f54;
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 0 15px;
+}
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 15px;
+}
+
+.col-md-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+    padding: 0 15px;
+}
+
+.col-md-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+    padding: 0 15px;
+}
+
+.col-md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 15px;
+}
+
+/* ============================================
+   TOPO INSTITUCIONAL - FAIXA AZUL
+   ============================================ */
+.top-bar {
+    background: #1c3f6e;
+    min-height: 5px;
+}
+
+/* ============================================
+   CABEÇALHO PRINCIPAL (TESTEIRA UNIFICADA)
+   ============================================ */
 .site-header {
-    width: 100%;
     background: #ffffff;
+    width: 100%;
 }
 
 .site-header__top {
@@ -46,7 +108,7 @@ ul {
     position: relative;
 }
 
-/* busca no canto superior direito */
+/* Busca no canto superior direito */
 .site-header__search {
     position: absolute;
     top: -8px;
@@ -63,6 +125,7 @@ ul {
     padding: 5px 8px;
     font-size: 13px;
     width: 140px;
+    border-radius: 4px 0 0 4px;
 }
 
 .site-header__search button {
@@ -71,9 +134,14 @@ ul {
     color: #fff;
     padding: 5px 10px;
     cursor: pointer;
+    border-radius: 0 4px 4px 0;
 }
 
-/* logo FFLCH + nome do site */
+.site-header__search button:hover {
+    background: #142f54;
+}
+
+/* Logo FFLCH + nome do site */
 .site-branding {
     display: flex;
     align-items: center;
@@ -90,11 +158,15 @@ ul {
     line-height: 1.15;
 }
 
+.site-branding__text a {
+    text-decoration: none;
+}
+
 .site-branding__line1 {
     display: block;
     font-size: 13px;
     letter-spacing: 1px;
-    color: #1c3f6e;
+    color: #1c3f6e;  /* MESMO AZUL DO RESTO DO SITE */
     font-weight: 400;
     text-transform: uppercase;
 }
@@ -103,21 +175,21 @@ ul {
     display: block;
     font-size: 30px;
     font-weight: 700;
-    color: #4a6fa5;
+    color: #1c3f6e;  /* MESMO AZUL DO RESTO DO SITE - CORRIGIDO */
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-/* logo USP à direita */
+/* Logo USP à direita */
 .site-header__usp img {
     height: 42px;
     width: auto;
     display: block;
 }
 
-/* ===========================
+/* ============================================
    MENU PRINCIPAL (NAVEGAÇÃO)
-=========================== */
+   ============================================ */
 .site-nav {
     background: #1c3f6e;
     width: 100%;
@@ -131,6 +203,9 @@ ul {
 .site-nav ul.menu {
     display: flex;
     flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .site-nav ul.menu li {
@@ -151,61 +226,745 @@ ul {
     letter-spacing: 0.5px;
     text-transform: uppercase;
     white-space: nowrap;
+    text-decoration: none;
 }
 
 .site-nav ul.menu li a:hover,
-.site-nav ul.menu li.current-menu-item > a {
+.site-nav ul.menu li.current-menu-item > a,
+.site-nav ul.menu li.current-page-item > a {
     background: #142f54;
 }
 
-/* seta indicando submenu */
-.site-nav ul.menu li.menu-item-has-children > a::after {
-    content: "\25B8"; /* ► */
-    font-size: 10px;
-    margin-left: 8px;
-    vertical-align: middle;
-}
+/* ============================================
+   SUBMENUS COM ESPAÇAMENTO E EFEITO TAB
+   ============================================ */
 
-/* submenu (dropdown) */
+/* Submenu de 1º nível */
 .site-nav ul.menu ul.sub-menu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: 220px;
+    min-width: 240px;
     background: #142f54;
     z-index: 100;
+    padding: 8px 0;
+    list-style: none;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    border-left: 3px solid #4a6fa5;
 }
 
-.site-nav ul.menu li:hover > ul.sub-menu {
+/* Espaçamento entre itens do submenu */
+.site-nav ul.menu ul.sub-menu li {
+    border-right: none;
+    border-bottom: none;
+    margin: 0 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Cada item do submenu com espaçamento */
+.site-nav ul.menu ul.sub-menu li a {
+    padding: 10px 16px;
+    white-space: normal;
+    display: block;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    transition: all 0.2s ease;
+}
+
+/* Efeito hover nos itens do submenu com deslocamento */
+.site-nav ul.menu ul.sub-menu li a:hover {
+    background: #1c3f6e;
+    color: #fff;
+    padding-left: 20px;
+}
+
+/* Efeito de separação entre itens */
+.site-nav ul.menu ul.sub-menu li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 4px;
+}
+
+/* Seta para itens com submenu (nível 1) */
+.site-nav ul.menu li.menu-item-has-children > a::after {
+    content: "\25BE";
+    font-size: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* ============================================
+   SUBMENU DE 2º NÍVEL (NETOS)
+   ============================================ */
+
+.site-nav ul.menu ul.sub-menu ul.sub-menu {
+    left: 100%;
+    top: -4px;
+    min-width: 240px;
+    background: #0f2642;
+    padding: 8px 0;
+    margin-left: 4px;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-left: 3px solid #6a8fc5;
+}
+
+/* Espaçamento entre itens do submenu de 2º nível */
+.site-nav ul.menu ul.sub-menu ul.sub-menu li {
+    margin: 0 8px;
+}
+
+.site-nav ul.menu ul.sub-menu ul.sub-menu li a {
+    padding: 9px 16px;
+    font-size: 12.5px;
+}
+
+.site-nav ul.menu ul.sub-menu ul.sub-menu li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 4px;
+}
+
+.site-nav ul.menu ul.sub-menu ul.sub-menu li a:hover {
+    background: #1c3f6e;
+    padding-left: 20px;
+}
+
+/* Seta para submenu de 2º nível */
+.site-nav ul.menu ul.sub-menu li.menu-item-has-children > a::after {
+    content: "\25B8";
+    font-size: 10px;
+    margin-left: 12px;
+    vertical-align: middle;
+    float: right;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   SUBMENU DE 3º NÍVEL (BISNETOS)
+   ============================================ */
+
+.site-nav ul.menu ul.sub-menu ul.sub-menu ul.sub-menu {
+    left: 100%;
+    top: -4px;
+    min-width: 220px;
+    background: #0a1d33;
+    padding: 8px 0;
+    border-radius: 4px;
+    border-left: 3px solid #8aafd5;
+}
+
+.site-nav ul.menu ul.sub-menu ul.sub-menu ul.sub-menu li {
+    margin: 0 8px;
+}
+
+.site-nav ul.menu ul.sub-menu ul.sub-menu ul.sub-menu li a {
+    padding: 8px 16px;
+    font-size: 12px;
+}
+
+.site-nav ul.menu ul.sub-menu ul.sub-menu ul.sub-menu li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    margin-bottom: 4px;
+}
+
+.site-nav ul.menu ul.sub-menu ul.sub-menu ul.sub-menu li a:hover {
+    background: #1c3f6e;
+    padding-left: 20px;
+}
+
+/* Seta para submenu de 3º nível */
+.site-nav ul.menu ul.sub-menu ul.sub-menu li.menu-item-has-children > a::after {
+    content: "\25B8";
+    font-size: 10px;
+    margin-left: 12px;
+    vertical-align: middle;
+    float: right;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ============================================
+   INDICADOR VISUAL DE PROFUNDIDADE (TAB)
+   ============================================ */
+
+/* Indicador visual nos itens do submenu */
+.site-nav ul.menu ul.sub-menu li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 60%;
+    width: 2px;
+    background: transparent;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.site-nav ul.menu ul.sub-menu li:hover::before {
+    background: #4a6fa5;
+}
+
+/* Submenu de 2º nível - indicador visual */
+.site-nav ul.menu ul.sub-menu ul.sub-menu li::before {
+    background: transparent;
+}
+
+.site-nav ul.menu ul.sub-menu ul.sub-menu li:hover::before {
+    background: #6a8fc5;
+}
+
+/* Submenu de 3º nível - indicador visual */
+.site-nav ul.menu ul.sub-menu ul.sub-menu ul.sub-menu li::before {
+    background: transparent;
+}
+
+.site-nav ul.menu ul.sub-menu ul.sub-menu ul.sub-menu li:hover::before {
+    background: #8aafd5;
+}
+
+/* ============================================
+   ÁREAS DE WIDGET DA PÁGINA INICIAL
+   ============================================ */
+.front-top-area {
+    background: #1c3f6e;
+    color: #fff;
+    padding: 40px 0;
+    margin-bottom: 30px;
+}
+
+.front-top-area .widget-title {
+    color: #fff;
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.front-content-area {
+    background: #fff;
+    padding: 30px 0;
+}
+
+.front-footer-area {
+    background: #f8f9fa;
+    padding: 40px 0;
+    margin-top: 30px;
+}
+
+/* ============================================
+   SIDEBARS
+   ============================================ */
+.sidebar-left,
+.sidebar-right {
+    padding: 0 15px;
+}
+
+.sidebar-left .widget,
+.sidebar-right .widget {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+}
+
+.sidebar-left .widget-title,
+.sidebar-right .widget-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1c3f6e;
+    border-bottom: 3px solid #1c3f6e;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* Classes para quando as sidebars estão ativas */
+.has-left-sidebar .col-md-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+
+.has-left-sidebar .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+/* ============================================
+   WIDGETS
+   ============================================ */
+.widget {
+    margin-bottom: 30px;
+}
+
+.widget:last-child {
+    margin-bottom: 0;
+}
+
+.widget-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1c3f6e;
+    border-bottom: 3px solid #1c3f6e;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Widget de Notícias */
+.news-list {
+    padding: 0;
+}
+
+.news-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-item .news-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1c3f6e;
     display: block;
 }
 
-.site-nav ul.menu ul.sub-menu li {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+.news-item h4 {
+    font-size: 14px;
+    margin: 5px 0 0;
 }
 
-.site-nav ul.menu ul.sub-menu li a {
-    padding: 12px 18px;
-    white-space: normal;
+.news-item h4 a {
+    color: #333;
+    text-decoration: none;
 }
 
-/* ===========================
+.news-item h4 a:hover {
+    color: #1c3f6e;
+}
+
+/* Widget de Eventos */
+.events-list {
+    padding: 0;
+}
+
+.event-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.event-item:last-child {
+    border-bottom: none;
+}
+
+.event-item .event-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1c3f6e;
+    display: block;
+}
+
+.event-item h4 {
+    font-size: 14px;
+    margin: 5px 0 0;
+}
+
+.event-item h4 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.event-item h4 a:hover {
+    color: #1c3f6e;
+}
+
+/* ============================================
+   CONTEÚDO DE PÁGINAS E POSTS
+   ============================================ */
+.page-content-area,
+.single-content-area {
+    background: #fff;
+    padding: 40px 0;
+}
+
+.entry-header {
+    margin-bottom: 20px;
+}
+
+.entry-header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1c3f6e;
+    margin: 0 0 10px;
+}
+
+.entry-meta {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.entry-meta span {
+    margin-right: 15px;
+}
+
+.entry-content {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.entry-content > * {
+    margin-bottom: 1.5em;
+}
+
+.entry-content p {
+    margin-bottom: 1.2em;
+}
+
+.entry-content h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1c3f6e;
+    margin: 30px 0 15px;
+}
+
+.entry-content h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1c3f6e;
+    margin: 25px 0 15px;
+}
+
+.entry-content ul,
+.entry-content ol {
+    margin: 0 0 1.5em 2em;
+}
+
+.entry-content li {
+    margin-bottom: 5px;
+}
+
+.post-thumbnail {
+    margin-bottom: 20px;
+}
+
+.post-thumbnail img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.entry-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 14px;
+}
+
+.edit-link {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Navegação entre posts */
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Paginação */
+.pagination {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pagination .page-numbers {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 0 2px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    color: #1c3f6e;
+    text-decoration: none;
+}
+
+.pagination .page-numbers:hover {
+    background: #f5f5f5;
+}
+
+.pagination .page-numbers.current {
+    background: #1c3f6e;
+    color: #fff;
+    border-color: #1c3f6e;
+}
+
+/* ============================================
+   RODAPÉ
+   ============================================ */
+.site-footer {
+    background: #1c3f6e;
+    color: #fff;
+    padding: 40px 0 20px;
+    margin-top: 40px;
+}
+
+.footer-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-column-widget {
+    margin-bottom: 20px;
+}
+
+.footer-widget-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-column-widget ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column-widget ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column-widget ul li a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s;
+}
+
+.footer-column-widget ul li a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
+
+.footer-bottom p {
+    margin: 5px 0;
+}
+
+/* ============================================
+   BOTÃO VOLTAR AO TOPO
+   ============================================ */
+.btn-btt {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    background: #1c3f6e;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+.btn-btt:hover {
+    background: #142f54;
+    transform: scale(1.1);
+}
+
+/* ============================================
+   CLASSES DO WORDPRESS
+   ============================================ */
+.alignleft {
+    float: left;
+    margin: 0 1.5em 1em 0;
+}
+
+.alignright {
+    float: right;
+    margin: 0 0 1em 1.5em;
+}
+
+.aligncenter {
+    display: block;
+    margin: 0 auto 1.5em;
+}
+
+.wp-caption {
+    max-width: 100%;
+    margin-bottom: 1.5em;
+}
+
+.wp-caption-text {
+    font-size: 13px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.sticky {
+    background: #f8f9fa;
+    padding: 20px;
+    border-left: 4px solid #1c3f6e;
+}
+
+.gallery {
+    display: grid;
+    gap: 10px;
+}
+
+.gallery-item {
+    margin: 0;
+}
+
+/* ============================================
+   SHORTCODES
+   ============================================ */
+.shortcode-noticias,
+.shortcode-eventos {
+    margin: 20px 0;
+}
+
+.shortcode-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.shortcode-item:last-child {
+    border-bottom: none;
+}
+
+.shortcode-item .data {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1c3f6e;
+    display: block;
+}
+
+/* ============================================
+   404 PAGE
+   ============================================ */
+.error-404 {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.error-404 h1 {
+    font-size: 100px;
+    font-weight: 800;
+    color: #1c3f6e;
+    margin: 0;
+}
+
+.error-404 h2 {
+    font-size: 28px;
+    margin: 20px 0;
+}
+
+.error-404 .button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #1c3f6e;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.error-404 .button:hover {
+    background: #142f54;
+    text-decoration: none;
+}
+
+/* ============================================
    RESPONSIVO
-=========================== */
+   ============================================ */
+
+/* Tablets e telas médias */
+@media (max-width: 992px) {
+    .col-md-3,
+    .col-md-6,
+    .col-md-8,
+    .col-md-9,
+    .col-md-12 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+    .sidebar-left,
+    .sidebar-right {
+        order: 2 !important;
+    }
+
+    .has-left-sidebar .col-md-8,
+    .has-left-sidebar .col-md-6 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+    .has-left-sidebar .sidebar-left,
+    .has-right-sidebar .sidebar-right {
+        order: 1 !important;
+    }
+}
+
+/* Dispositivos móveis */
 @media (max-width: 900px) {
+    /* Ajustes do cabeçalho */
     .site-header__top {
         flex-wrap: wrap;
         justify-content: center;
         text-align: center;
+        padding-top: 20px;
     }
 
     .site-header__search {
         position: static;
         margin-bottom: 10px;
+        width: 100%;
     }
 
+    .site-header__search form {
+        justify-content: center;
+    }
+
+    .site-header__search input[type="search"],
+    .site-header__search input[type="text"] {
+        width: 200px;
+    }
+
+    .site-branding {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .site-branding__line2 {
+        font-size: 24px;
+    }
+
+    /* Menu em coluna */
     .site-nav ul.menu {
         flex-direction: column;
     }
@@ -215,8 +974,173 @@ ul {
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     }
 
+    .site-nav ul.menu li a {
+        white-space: normal;
+        padding-right: 40px;
+    }
+
+    /* Submenus em mobile - posição estática */
     .site-nav ul.menu ul.sub-menu {
         position: static;
         min-width: 100%;
+        background: #0f2642;
+        padding: 4px 0;
+        box-shadow: none;
+        border-radius: 0;
+        border-left: none;
+    }
+
+    .site-nav ul.menu ul.sub-menu li {
+        margin: 0 4px;
+        border-radius: 0;
+    }
+
+    .site-nav ul.menu ul.sub-menu li a {
+        padding: 10px 16px 10px 30px;
+        font-size: 13px;
+    }
+
+    /* Submenu de 2º nível em mobile */
+    .site-nav ul.menu ul.sub-menu ul.sub-menu {
+        left: 0;
+        top: 0;
+        padding: 4px 0;
+        background: #0a1d33;
+        margin-left: 0;
+        border-radius: 0;
+        box-shadow: none;
+        border-left: none;
+    }
+
+    .site-nav ul.menu ul.sub-menu ul.sub-menu li a {
+        padding: 10px 16px 10px 45px;
+        font-size: 12.5px;
+    }
+
+    /* Submenu de 3º nível em mobile */
+    .site-nav ul.menu ul.sub-menu ul.sub-menu ul.sub-menu {
+        padding: 4px 0;
+        background: #061526;
+        border-left: none;
+    }
+
+    .site-nav ul.menu ul.sub-menu ul.sub-menu ul.sub-menu li a {
+        padding: 10px 16px 10px 60px;
+        font-size: 12px;
+    }
+
+    /* Toggle para submenus em mobile */
+    .site-nav ul.menu li.menu-item-has-children > a {
+        position: relative;
+    }
+
+    .site-nav ul.menu li.menu-item-has-children > a::after {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        content: "\25BE";
+    }
+
+    .site-nav ul.menu li.menu-item-has-children.open > a::after {
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    .site-nav ul.menu ul.sub-menu li.menu-item-has-children > a::after {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        content: "\25BE";
+        float: none;
+    }
+
+    .site-nav ul.menu ul.sub-menu li.menu-item-has-children.open > a::after {
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    /* Submenus aninhados - display controlado por JS */
+    .site-nav ul.menu ul.sub-menu {
+        display: none;
+    }
+
+    .site-nav ul.menu li.open > ul.sub-menu {
+        display: block;
+    }
+
+    /* Espaçamento entre itens em mobile */
+    .site-nav ul.menu ul.sub-menu li:not(:last-child) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        margin-bottom: 2px;
+    }
+
+    .site-nav ul.menu ul.sub-menu li a:hover {
+        padding-left: 20px;
+    }
+
+    /* Rodapé */
+    .footer-columns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .entry-header h1 {
+        font-size: 24px;
+    }
+
+    .post-navigation {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .error-404 h1 {
+        font-size: 60px;
+    }
+}
+
+/* Telas muito pequenas */
+@media (max-width: 480px) {
+    .site-header__search input[type="search"],
+    .site-header__search input[type="text"] {
+        width: 140px;
+    }
+
+    .site-branding__line2 {
+        font-size: 20px;
+    }
+
+    .site-branding__line1 {
+        font-size: 11px;
+    }
+
+    .site-header__usp img {
+        height: 32px;
+    }
+
+    .site-nav ul.menu li a {
+        font-size: 12px;
+        padding: 12px 16px;
+    }
+
+    .site-nav ul.menu ul.sub-menu li a {
+        padding: 9px 16px 9px 24px;
+        font-size: 12px;
+    }
+
+    .site-nav ul.menu ul.sub-menu ul.sub-menu li a {
+        padding: 9px 16px 9px 36px;
+        font-size: 11.5px;
+    }
+
+    .site-nav ul.menu ul.sub-menu ul.sub-menu ul.sub-menu li a {
+        padding: 9px 16px 9px 48px;
+        font-size: 11px;
+    }
+
+    .footer-columns {
+        grid-template-columns: 1fr;
+        text-align: center;
     }
 }
