@@ -1,11 +1,10 @@
 <?php
 /**
- * Template Principal (index.php)
- * Ponto de entrada do tema
+ * Template para resultados de busca
+ * Com duas sidebars desativáveis
  */
 
-get_header();
-?>
+get_header(); ?>
 
 <div class="page-content-area">
     <div class="container">
@@ -20,20 +19,30 @@ get_header();
 
             <!-- CONTEÚDO PRINCIPAL -->
             <div class="<?php echo wp_fflch_theme_get_content_class(); ?>">
+                <header class="page-header">
+                    <h1 class="page-title">
+                        <?php printf(__('Resultados da busca: %s', 'wp-fflch-theme'), get_search_query()); ?>
+                    </h1>
+                </header>
+
                 <?php if (have_posts()) : ?>
                     <?php while (have_posts()) : the_post(); ?>
                         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                             <header class="entry-header">
-                                <h1 class="entry-title"><?php the_title(); ?></h1>
+                                <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                                <div class="entry-meta">
+                                    <span class="posted-on">
+                                        <?php _e('Publicado em', 'wp-fflch-theme'); ?> 
+                                        <time datetime="<?php echo get_the_date('c'); ?>">
+                                            <?php echo get_the_date(); ?>
+                                        </time>
+                                    </span>
+                                </div>
                             </header>
 
-                            <div class="entry-content">
-                                <?php the_content(); ?>
+                            <div class="entry-summary">
+                                <?php the_excerpt(); ?>
                             </div>
-
-                            <footer class="entry-footer">
-                                <?php edit_post_link(__('Editar', 'wp-fflch-theme'), '<span class="edit-link">', '</span>'); ?>
-                            </footer>
                         </article>
                     <?php endwhile; ?>
 
@@ -48,9 +57,8 @@ get_header();
                     </div>
 
                 <?php else : ?>
-                    <div class="no-content">
-                        <p><?php _e('Nenhum conteúdo encontrado.', 'wp-fflch-theme'); ?></p>
-                    </div>
+                    <p><?php _e('Nenhum resultado encontrado para sua busca.', 'wp-fflch-theme'); ?></p>
+                    <?php get_search_form(); ?>
                 <?php endif; ?>
             </div>
 

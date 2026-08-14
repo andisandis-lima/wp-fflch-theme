@@ -1,17 +1,16 @@
 <?php
 /**
- * Template Principal (index.php)
- * Ponto de entrada do tema
+ * Template padrão para páginas
+ * Com duas sidebars (esquerda e direita) desativáveis
  */
 
-get_header();
-?>
+get_header(); ?>
 
 <div class="page-content-area">
     <div class="container">
         <div class="row">
 
-            <!-- SIDEBAR ESQUERDA -->
+            <!-- SIDEBAR ESQUERDA (Desativável) -->
             <?php if (is_active_sidebar('sidebar-left')) : ?>
                 <div class="col-md-3 sidebar-left">
                     <?php dynamic_sidebar('sidebar-left'); ?>
@@ -24,7 +23,7 @@ get_header();
                     <?php while (have_posts()) : the_post(); ?>
                         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                             <header class="entry-header">
-                                <h1 class="entry-title"><?php the_title(); ?></h1>
+                                <h1><?php the_title(); ?></h1>
                             </header>
 
                             <div class="entry-content">
@@ -36,25 +35,10 @@ get_header();
                             </footer>
                         </article>
                     <?php endwhile; ?>
-
-                    <div class="pagination">
-                        <?php
-                        the_posts_pagination(array(
-                            'mid_size'  => 2,
-                            'prev_text' => __('← Anterior', 'wp-fflch-theme'),
-                            'next_text' => __('Próximo →', 'wp-fflch-theme'),
-                        ));
-                        ?>
-                    </div>
-
-                <?php else : ?>
-                    <div class="no-content">
-                        <p><?php _e('Nenhum conteúdo encontrado.', 'wp-fflch-theme'); ?></p>
-                    </div>
                 <?php endif; ?>
             </div>
 
-            <!-- SIDEBAR DIREITA -->
+            <!-- SIDEBAR DIREITA (Desativável) -->
             <?php if (is_active_sidebar('sidebar-right')) : ?>
                 <div class="col-md-3 sidebar-right">
                     <?php dynamic_sidebar('sidebar-right'); ?>
